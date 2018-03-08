@@ -55,9 +55,4 @@ public class Parser {
         store.put("jobs", addPage("jobs"));
     }
 
-    public static void main(String[] args) throws IOException{
-        Parser p = new Parser();
-        p.aggregate();
-        System.out.println(p.store);
-    }
 }
