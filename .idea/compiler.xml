@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="hnparser" />
+        <module name="server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="hnparser" target="1.5" />
+      <module name="server" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
