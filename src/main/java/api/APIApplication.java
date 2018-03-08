@@ -1,15 +1,20 @@
 package api;
 
 import api.resources.ReviewResource;
+import api.services.ReviewService;
 import io.dropwizard.Application;
-import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class APIApplication extends Application<Configuration> {
+import javax.sql.DataSource;
 
+public class APIApplication extends Application<ReviewConfiguration> {
+    private static final String SQL = "sql";
+    private static final String DROPWIZARD_REVIEW_SERVICE = "Dropwizard review service";
+    private static final String BEARER = "Bearer";
     private static final Logger LOGGER = LoggerFactory.getLogger(APIApplication.class);
 
     public static void main(String[] args) throws Exception {
@@ -21,16 +26,17 @@ public class APIApplication extends Application<Configuration> {
         return "parser";
     }
 
-    @Override
-    public void initialize(Bootstrap<Configuration> bootstrap) {
-        // nothing to do yet
-    }
+    public void run(ReviewConfiguration c, Environment environment) throws Exception {
+        // datasource config
+        final DataSource dataSource = c.getDataSourceFactory().build(environment.metrics(), SQL);
+        DBI dbi = new DBI(dataSource);
 
-    public void run(Configuration c, Environment environment) throws Exception {
+        // register health check
 
-        final ReviewResource reviewResource = new ReviewResource(environment.getValidator());
+
+        // register oauth
         LOGGER.info("Registering REST resources");
 
-        environment.jersey().register(reviewResource);
+        environment.jersey().register(new ReviewResource(dbi.onDemand(ReviewService.class)));
     }
 }

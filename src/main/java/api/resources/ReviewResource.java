@@ -1,34 +1,53 @@
 package api.resources;
 
-import api.resources.representations.Review;
+import api.jdbi.Review;
+import api.services.ReviewService;
+import com.codahale.metrics.annotation.Timed;
+import org.eclipse.jetty.http.HttpStatus;
 
+import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.validation.Validator;
+import java.util.List;
 
 @Path("/reviews")
 @Produces(MediaType.APPLICATION_JSON)
 public class ReviewResource {
-    private final Validator validator;
+    private final ReviewService reviewService;
 
-    public ReviewResource(Validator validator) {
-        this.validator = validator;
+    public ReviewResource(ReviewService reviewService) {
+        this.reviewService = reviewService;
     }
 
     @GET
-    public Response getReviews() {
-        return Response.ok(ReviewDB.getReviews()).build();
+    @Timed
+    public Representation<List<Review>> getReviews() {
+        return new Representation<List<Review>>(HttpStatus.OK_200, reviewService.getReviews());
     }
 
     @GET
+    @Timed
     @Path("/{id}")
-    public Response getReviewById(@PathParam("id") Integer id) {
-        Review review = ReviewDB.getReview(id);
-        if (review != null)
-            return Response.ok(review).build();
-        else
-            return Response.status(Response.Status.NOT_FOUND).build();
+    public Representation<Review> getReview(@PathParam("id") final int id) {
+        return new Representation<Review>(HttpStatus.OK_200, reviewService.getReview(id));
+    }
+
+    @POST
+    @Timed
+    @Path("/{id}")
+    @RolesAllowed("ADMIN")
+    public Representation<Review> createReview(@NotNull @Valid final Review review) {
+        return new Representation<Review>(HttpStatus.OK_200, reviewService.createReview(review));
+    }
+
+    @DELETE
+    @Timed
+    @Path("/{id}")
+    @RolesAllowed("ADMIN")
+    public Representation<String> deleteReview(@PathParam("id") final int id) {
+        return new Representation<String>(HttpStatus.OK_200, reviewService.deleteReview(id));
     }
 
 }
