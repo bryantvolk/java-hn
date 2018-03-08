@@ -1,3 +1,5 @@
+package parser;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,11 +16,15 @@ public class Parser {
     private Map<String, List<Submission>> store;
     private List<Submission> home;
     private List<Submission> jobs;
+    private List<Submission> newest;
+    private List<Submission> show;
 
     public Parser() {
         store = new HashMap<String, List<Submission>>();
         home = new LinkedList<Submission>();
         jobs = new LinkedList<Submission>();
+        newest = new LinkedList<Submission>();
+        show = new LinkedList<Submission>();
     }
 
     private Document getDoc(String url) throws IOException {

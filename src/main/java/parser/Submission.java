@@ -1,3 +1,5 @@
+package parser;
+
 public class Submission {
 
     private final String title;
