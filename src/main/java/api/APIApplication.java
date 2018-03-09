@@ -32,11 +32,10 @@ public class APIApplication extends Application<ReviewConfiguration> {
         DBI dbi = new DBI(dataSource);
 
         // register health check
+        ReviewHealthCheck healthCheck = new ReviewHealthCheck(dbi.onDemand(ReviewService.class));
+        environment.healthChecks().register(DROPWIZARD_REVIEW_SERVICE, healthCheck);
 
-
-        // register oauth
         LOGGER.info("Registering REST resources");
-
         environment.jersey().register(new ReviewResource(dbi.onDemand(ReviewService.class)));
     }
 }

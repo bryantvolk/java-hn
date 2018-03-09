@@ -37,7 +37,6 @@ public class ReviewResource {
     @POST
     @Timed
     @Path("/{id}")
-    @RolesAllowed("ADMIN")
     public Representation<Review> createReview(@NotNull @Valid final Review review) {
         return new Representation<Review>(HttpStatus.OK_200, reviewService.createReview(review));
     }

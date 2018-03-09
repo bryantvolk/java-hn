@@ -8,16 +8,19 @@ public class Review {
     private String title;
     @NotEmpty
     private String body;
+    @NotEmpty
+    private String timestamp;
 
 
     public Review() {
         super();
     }
 
-    public Review(int  id, String title, String body) {
+    public Review(int  id, String title, String body, String timestamp) {
         this.id = id;
         this.title = title;
         this.body = body;
+        this.timestamp = timestamp;
     }
 
     public int getId() {return id;}
@@ -26,5 +29,6 @@ public class Review {
     public void setTitle() {this.title = title;}
     public String getBody() {return body;}
     public void setBody(String body) {this.body = body;}
-
+    public void setTimestamp(String timestamp) {this.timestamp = timestamp;}
+    public String getTimestamp() {return timestamp;}
 }

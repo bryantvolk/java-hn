@@ -10,8 +10,9 @@ public class ReviewMapper implements ResultSetMapper<Review> {
     private static final String ID = "id";
     private static final String TITLE = "title";
     private static final String BODY = "body";
+    private static final String TIMESTAMP = "timestamp";
 
     public Review map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
-        return new Review(resultSet.getInt(ID), resultSet.getString(TITLE), resultSet.getString(BODY));
+        return new Review(resultSet.getInt(ID), resultSet.getString(TITLE), resultSet.getString(BODY), resultSet.getString(TIMESTAMP));
     }
 }
