@@ -5,11 +5,15 @@ import api.services.ReviewService;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration;
 import javax.sql.DataSource;
+import java.util.EnumSet;
 
 public class APIApplication extends Application<ReviewConfiguration> {
     private static final String SQL = "sql";
@@ -27,6 +31,12 @@ public class APIApplication extends Application<ReviewConfiguration> {
     }
 
     public void run(ReviewConfiguration c, Environment environment) throws Exception {
+        final FilterRegistration.Dynamic cors =
+                environment.servlets().addFilter("CORS", CrossOriginFilter.class);
+        cors.setInitParameter("allowedOrigins", "*");
+        cors.setInitParameter("allowedHeaders", "X-Requested-With,Content-Type,Accept,Origin");
+        cors.setInitParameter("allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD");
+        cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
         // datasource config
         final DataSource dataSource = c.getDataSourceFactory().build(environment.metrics(), SQL);
         DBI dbi = new DBI(dataSource);

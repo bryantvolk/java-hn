@@ -21,6 +21,7 @@ public class ReviewResource {
         this.reviewService = reviewService;
     }
 
+
     @GET
     @Timed
     public Representation<List<Review>> getReviews() {
