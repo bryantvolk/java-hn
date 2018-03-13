@@ -1,0 +1,11 @@
+/home/bryant/java-server/src/main/java/api/APIApplication.java
+/home/bryant/java-server/src/main/java/api/resources/Representation.java
+/home/bryant/java-server/src/main/java/api/ReviewHealthCheck.java
+/home/bryant/java-server/src/main/java/api/jdbi/ReviewMapper.java
+/home/bryant/java-server/src/main/java/parser/Submission.java
+/home/bryant/java-server/src/main/java/api/jdbi/Review.java
+/home/bryant/java-server/src/main/java/api/services/ReviewService.java
+/home/bryant/java-server/src/main/java/api/resources/ReviewResource.java
+/home/bryant/java-server/src/main/java/parser/Parser.java
+/home/bryant/java-server/src/main/java/api/ReviewConfiguration.java
+/home/bryant/java-server/src/main/java/api/jdbi/ReviewDao.java
