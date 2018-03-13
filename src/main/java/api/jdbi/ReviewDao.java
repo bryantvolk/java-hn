@@ -17,7 +17,7 @@ public interface ReviewDao {
     @SqlQuery("select * from reviews where id = :id")
     public Review getReview(@Bind("id") final int id);
 
-    @SqlUpdate("insert into reviews(title, body) values(:title, :body)")
+    @SqlUpdate("insert into reviews(title, body, image, link) values(:title, :body, :image, :link)")
     void createReview(@BindBean final Review review);
 
     @SqlUpdate("delete from review where id = :id")
