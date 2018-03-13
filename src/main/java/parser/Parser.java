@@ -53,6 +53,18 @@ public class Parser {
     public void aggregate() throws IOException {
         store.put("home", addPage(""));
         store.put("jobs", addPage("jobs"));
+        store.put("newest", addPage("newest"));
+        store.put("show", addPage("show"));
+        store.put("ask", addPage("ask"));
     }
+    public static void main(String args[]) {
+        Parser p = new Parser();
+        try {
+            p.aggregate();
+            System.out.println(p.store);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
 
+    }
 }
