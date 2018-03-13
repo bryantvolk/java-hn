@@ -3,9 +3,9 @@
 
 database:
   driverClass: com.mysql.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/db?autoReconnect=true&useSSL=false
-  user: bryant 
-  password: bryant 
+  url: jdbc:mysql://localhost:3306/sys?autoReconnect=true&useSSL=false
+  user: bryantvolk
+  password: password
   maxWaitForConnection: 10s
   validationQuery: "SELECT 1"
   validationQueryTimeout: 3s

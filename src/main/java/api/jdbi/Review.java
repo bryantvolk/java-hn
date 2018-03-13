@@ -4,12 +4,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Review {
     private int id;
+    private String timestamp;
     @NotEmpty
     private String title;
     @NotEmpty
     private String body;
-    @NotEmpty
-    private String timestamp;
     @NotEmpty
     private String image;
     @NotEmpty
