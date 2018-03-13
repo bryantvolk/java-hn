@@ -13,8 +13,11 @@ public class ReviewMapper implements ResultSetMapper<Review> {
     private static final String TIMESTAMP = "timestamp";
     private static final String IMAGE = "image";
     private static final String LINK = "link";
+    private static final String AUTHOR = "author";
 
     public Review map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
-        return new Review(resultSet.getInt(ID), resultSet.getString(TITLE), resultSet.getString(BODY), resultSet.getString(TIMESTAMP), resultSet.getString(IMAGE), resultSet.getString(LINK));
+        return new Review(resultSet.getInt(ID), resultSet.getString(TITLE), resultSet.getString(BODY),
+                resultSet.getString(TIMESTAMP), resultSet.getString(IMAGE), resultSet.getString(LINK),
+                resultSet.getString(AUTHOR));
     }
 }
